@@ -5,7 +5,7 @@
 <div>
   <ul ng-show="view4Ctrl.channellist.length">
     <li ng-repeat="channel in view4Ctrl.channellist track by $index">
-      {{channel.name}}
+      <a href="#/view5?channelId={{channel.key}}">{{channel.name}}</a>
     </li>
   </ul>
 </div>

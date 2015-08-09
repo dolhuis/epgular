@@ -1,0 +1,16 @@
+<p>This is the partial for view 5.</p>
+<h3 ng-hide="view5Ctrl.programList.length">
+  Your program list
+</h3>
+<h3 ng-show="view5Ctrl.programList.length">
+  Your program list for channel {{view5Ctrl.programList[0].channel_name}}
+</h3>
+<div>
+  <ul ng-show="view5Ctrl.programList.length">
+    <li ng-repeat="program in view5Ctrl.programList track by $index">
+      <h3>{{program.title}}</h3>
+      <div>{{program.time_start | date}} - {{program.time_end | date}}</div>
+      <div>{{program.descr_long || program.descr_short}}</div>
+    </li>
+  </ul>
+</div>
