@@ -19,7 +19,7 @@ angular.module('myApp.view4', ['ngRoute'])
     for (var attr in data) {
       $this.channellist.push({name: data[attr][0].channel_name, key: attr})
     }
-  }
+  };
 
   $this.updateEpg(null);
   $http.get('https://epg-api.xs4all.nl/index.php').success($this.updateEpg);

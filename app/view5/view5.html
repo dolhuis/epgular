@@ -5,12 +5,16 @@
 <h3 ng-show="view5Ctrl.programList.length">
   Your program list for channel {{view5Ctrl.programList[0].channel_name}}
 </h3>
-<div>
-  <ul ng-show="view5Ctrl.programList.length">
+<div ng-show="view5Ctrl.programList.length">
+  <div>
+    <a ng-hide="view5Ctrl.inPast(view5Ctrl.programList[0].time_start)" href="#/view5?channelId={{view5Ctrl.channelId}}&date={{view5Ctrl.previous | date:''}}">{{view5Ctrl.previous | date:'fullDate'}}</a> ||
+    {{view5Ctrl.focus | date:'fullDate'}} ||
+    <a href="#/view5?channelId={{view5Ctrl.channelId}}&date={{view5Ctrl.next | date:''}}">{{view5Ctrl.next | date:'fullDate'}}</a>
+  </div>
+  <ul>
     <li ng-repeat="program in view5Ctrl.programList track by $index">
-      <h3>{{program.title}}</h3>
-      <div>{{program.time_start | date}} - {{program.time_end | date}}</div>
-      <div>{{program.descr_long || program.descr_short}}</div>
+      <h4>{{program.time_start | date:'shortTime'}}: {{program.title}}</h4>
+      <div ng-hide="view5Ctrl.inPast(program.time_start)">{{program.descr_long || program.descr_short}}</div>
     </li>
   </ul>
 </div>
