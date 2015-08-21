@@ -11,9 +11,9 @@ angular.module('myApp.view3', ['ngRoute'])
 }])
 
 .controller('View3Ctrl', ['$http', function($http) {
-  var view3data = this;
-  view3data.ipAddress = '0.0.0.0';
+  var self = this;
+  self.ipAddress = '0.0.0.0';
   $http.get('https://webtv-api.xs4all.nl/2/remoteaddr').success(function(data){
-    view3data.ipAddress = data;
+    self.ipAddress = data;
   });
 }]);

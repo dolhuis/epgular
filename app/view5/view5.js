@@ -11,33 +11,33 @@ angular.module('myApp.view5', ['ngRoute'])
 }])
 
 .controller('View5Ctrl', ['$http', '$routeParams', function($http, $params) {
-  var $this = this;
+  var self = this;
   var dayOfMs = 24000*3600;
 
-  $this.updatePrograms = function(data) {
-    for (var i in data[$this.channelId]) {
-      var programObject = data[$this.channelId][i];
+  self.updatePrograms = function(data) {
+    for (var i in data[self.channelId]) {
+      var programObject = data[self.channelId][i];
       programObject.time_start = new Date(programObject.time_start);
       programObject.time_end = new Date(programObject.time_end);
-      $this.programList.push(programObject);
+      self.programList.push(programObject);
     }
   };
 
-  $this.inPast = function(date) {
-    return date < $this.now;
+  self.inPast = function(date) {
+    return date < self.now;
   };
 
-  $this.now = new Date();
-  $this.channelId = $params.channelId;
-  $this.programList = [];
+  self.now = new Date();
+  self.channelId = $params.channelId;
+  self.programList = [];
 
-  $this.focus = $params.date ? new Date(new Date($params.date).getTime()+10800000) : $this.now;
-  $this.previous = new Date($this.focus.getTime()-dayOfMs);
-  if ($this.previous < new Date()) {
-    $this.previous = null;
+  self.focus = $params.date ? new Date(new Date($params.date).getTime()+10800000) : self.now;
+  self.previous = new Date(self.focus.getTime()-dayOfMs);
+  if (self.previous < new Date()) {
+    self.previous = null;
   }
-  $this.next = new Date($this.focus.getTime()+dayOfMs);
+  self.next = new Date(self.focus.getTime()+dayOfMs);
 
-  $http.get('https://epg-api.xs4all.nl/index.php?channel='+$this.channelId+'&from='+$this.focus.toJSON().substring(0,10)+'T00:00:00&till='+$this.next.toJSON().substring(0,10)+'T00:00:00').success($this.updatePrograms);
+  $http.get('https://epg-api.xs4all.nl/index.php?channel='+self.channelId+'&from='+self.focus.toJSON().substring(0,10)+'T00:00:00&till='+self.next.toJSON().substring(0,10)+'T00:00:00').success(self.updatePrograms);
 
 }]);

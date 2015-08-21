@@ -11,17 +11,17 @@ angular.module('myApp.view4', ['ngRoute'])
 }])
 
 .controller('View4Ctrl', ['$http', function($http) {
-  var $this = this;
+  var self = this;
 
-  $this.updateEpg = function(data) {
-    $this.channellist = [];
-    $this.epg = data;
+  self.updateEpg = function(data) {
+    self.channellist = [];
+    self.epg = data;
     for (var attr in data) {
-      $this.channellist.push({name: data[attr][0].channel_name, key: attr})
+      self.channellist.push({name: data[attr][0].channel_name, key: attr})
     }
   };
 
-  $this.updateEpg(null);
-  $http.get('https://epg-api.xs4all.nl/index.php').success($this.updateEpg);
+  self.updateEpg(null);
+  $http.get('https://epg-api.xs4all.nl/index.php').success(self.updateEpg);
 
 }]);
