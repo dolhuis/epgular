@@ -1,11 +1,11 @@
 <p>This is the partial for view 4.</p>
 <h3>
-  Your channel list
+    Your channel list
 </h3>
 <div>
-  <ul ng-show="view4Ctrl.channellist.length">
-    <li ng-repeat="channel in view4Ctrl.channellist track by $index">
-      <a href="#/view5?channelId={{channel.key}}">{{channel.name}}</a>
-    </li>
-  </ul>
+    <ul ng-show="view4Ctrl.channellist.length">
+        <li ng-repeat="channel in view4Ctrl.channellist track by $index">
+            <a href="#/view5?channelId={{channel.key}}">{{channel.name}}</a>
+        </li>
+    </ul>
 </div>
