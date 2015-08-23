@@ -12,6 +12,7 @@
     "angular-mocks": "~1.4.0",
     "html5-boilerplate": "~5.2.0",
     "datejs": "~1.0.0-rc3",
-    "bootstrap-css": "~3.3.4"
+    "bootstrap-css": "~3.3.4",
+    "jquery": "~2.1.4"
   }
 }

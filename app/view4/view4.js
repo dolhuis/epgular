@@ -1,27 +1,29 @@
 'use strict';
 
-angular.module('myApp.view4', ['ngRoute'])
+angular
 
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/view4', {
-    templateUrl: 'view4/view4.html',
-    controller: 'View4Ctrl',
-    controllerAs: 'view4Ctrl'
-  });
-}])
+		.module('myApp.view4', ['ngRoute'])
 
-.controller('View4Ctrl', ['$http', function($http) {
-  var self = this;
+		.config(['$routeProvider', function ($routeProvider) {
+			$routeProvider.when('/view4', {
+				templateUrl: 'view4/view4.html',
+				controller: 'View4Ctrl',
+				controllerAs: 'view4Ctrl'
+			});
+		}])
 
-  self.updateEpg = function(data) {
-    self.channellist = [];
-    self.epg = data;
-    for (var attr in data) {
-      self.channellist.push({name: data[attr][0].channel_name, key: attr})
-    }
-  };
+		.controller('View4Ctrl', ['EpgService', function (EpgService) {
+			var me = this;
 
-  self.updateEpg(null);
-  $http.get('https://epg-api.xs4all.nl/index.php').success(self.updateEpg);
+			// public
+			me.channellist = [];
 
-}]);
+			me.refreshData = function () {
+				EpgService.async().then(function (response) {
+					me.channellist = EpgService.getChannels(response);
+				});
+			};
+
+			// init
+			me.refreshData();
+		}]);
