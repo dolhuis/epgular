@@ -19,8 +19,8 @@ angular
 			me.channellist = [];
 
 			me.refreshData = function () {
-				EpgService.async().then(function (response) {
-					me.channellist = EpgService.getChannels(response);
+				EpgService.async().then(function () {
+					me.channellist = EpgService.getChannels();
 				});
 			};
 

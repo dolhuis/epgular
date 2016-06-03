@@ -136,12 +136,19 @@ angular
 						fetchDate = new Date();
 						unprocessed = true;
 					}
-					return promise;
+
+					return promise.then(function(response) {
+						if (unprocessed) {
+							updateEpg(response.data);
+						}
+						return true;
+					}).catch(function (response) {
+						console.log(response.data);
+					}).finally(function() {
+						console.log('done!');
+					});
 				},
-				getChannels: function (response) {
-					if (unprocessed) {
-						updateEpg(response.data);
-					}
+				getChannels: function () {
 					return channellist;
 				}
 			};
