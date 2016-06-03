@@ -1,0 +1,6 @@
+epgserver:
+  build: .
+  ports:
+    - "8999:80"
+  volumes:
+    - "./app:/var/www/html"
